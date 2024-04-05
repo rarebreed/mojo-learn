@@ -9,7 +9,7 @@ struct Option[T: CE]:
     var data: Variant[T, NoneType]
 
     fn map[R: CE](
-        self, 
+        self,
         f: fn(T) -> R
     ) -> Option[R]:
         """Applies self.data to an fn that returns an R returning an Option[R].
@@ -23,6 +23,15 @@ struct Option[T: CE]:
             var r = f(self.data.take[T]())
             return Option[R](r)
 
+    fn map(inout self, f: fn(T) -> T) -> Self:
+        """More efficient map, when we map over the same type.
+        
+        Does not require creating a new Option, since we can reuse self.data
+        """
+        if self.data.isa[T]():
+            self.data = f(self.data.take[T]())
+        return self
+
     fn flat_map[R: CE](
         self, 
         f: fn(T) -> Option[R]
@@ -30,6 +39,11 @@ struct Option[T: CE]:
         if self.data.isa[NoneType]():
             return Option[R](None)
         return f(self.data.take[T]())
+
+    fn flat_map(inout self, f: fn(T) -> Self) -> Self:
+        if self.data.isa[T]():
+            self.data = f(self.data.take[T]())
+        return self
 
     fn chain[R: CE](
         self, 
