@@ -4,6 +4,9 @@ alias CE = CollectionElement
 
 # Ideally, there would be a trait Functor, that has a method `map` and Option would implememt
 # it.  But mojo's traits don't support parameters yet
+trait Functor:
+    fn map[T: CE, R: AnyType](self, f: fn(T) -> R) -> Self: ...
+
 @value
 struct Option[T: CE]:
     var data: Variant[T, NoneType]
@@ -26,7 +29,7 @@ struct Option[T: CE]:
     fn map(inout self, f: fn(T) -> T) -> Self:
         """More efficient map, when we map over the same type.
         
-        Does not require creating a new Option, since we can reuse self.data
+        Does not require allocating a new Option, since we can reuse self.data. 
         """
         if self.data.isa[T]():
             self.data = f(self.data.take[T]())

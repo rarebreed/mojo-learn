@@ -203,6 +203,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/71/52/39d20e03abd0ac9159c162ec24b93fbcaa111e8400308f2465432495ca2b/async_generator-1.10-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/85/f5/ab17cbd05032ff39286e84811dad376c9fdf1e6d0ff2ea711eb3271db405/coconut-3.1.0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/f1/2c/be67465b34206c24be7230746f589f0d4adbb60f96e889fc248fd51b9e3d/cPyparsing-2.4.7.2.3.2.tar.gz
+      - pypi: https://files.pythonhosted.org/packages/0f/10/be839bce6618ac94b3a7affebad0510392e05b470d2ac70e3addf0047171/daak-0.1.1-py3-none-any.whl
       osx-arm64:
       - conda: https://conda.anaconda.org/conda-forge/noarch/annotated-types-0.6.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/anyio-3.7.1-pyhd8ed1ab_0.conda
@@ -391,6 +392,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/71/52/39d20e03abd0ac9159c162ec24b93fbcaa111e8400308f2465432495ca2b/async_generator-1.10-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/85/f5/ab17cbd05032ff39286e84811dad376c9fdf1e6d0ff2ea711eb3271db405/coconut-3.1.0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/f1/2c/be67465b34206c24be7230746f589f0d4adbb60f96e889fc248fd51b9e3d/cPyparsing-2.4.7.2.3.2.tar.gz
+      - pypi: https://files.pythonhosted.org/packages/0f/10/be839bce6618ac94b3a7affebad0510392e05b470d2ac70e3addf0047171/daak-0.1.1-py3-none-any.whl
 packages:
 - kind: conda
   name: _libgcc_mutex
@@ -1323,6 +1325,12 @@ packages:
   version: 2.4.7.2.3.2
   url: https://files.pythonhosted.org/packages/f1/2c/be67465b34206c24be7230746f589f0d4adbb60f96e889fc248fd51b9e3d/cPyparsing-2.4.7.2.3.2.tar.gz
   sha256: 746c6a780f7e64dc717ac1cc28ffbab7841df0672cad851d26cf15faa11a4692
+- kind: pypi
+  name: daak
+  version: 0.1.1
+  url: https://files.pythonhosted.org/packages/0f/10/be839bce6618ac94b3a7affebad0510392e05b470d2ac70e3addf0047171/daak-0.1.1-py3-none-any.whl
+  sha256: b0500779deeca62f8834405717fae5aec40681c6db08db352d4cf0481e50b63b
+  requires_python: '>=3.9,<4.0'
 - kind: conda
   name: debugpy
   version: 1.8.1
