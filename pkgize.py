@@ -1,25 +1,24 @@
 import os
 from pathlib import Path
 from pprint import pprint
-import shutil
+import tomllib as toml
 
+def get_project_src_path(path: Path):
+    with open(path / "pixi.toml", "rb") as tf:
+        pixi_cfg = toml.load(tf)
+    src_path = pixi_cfg["project"]["name"].replace("-", "_")
+    return path / src_path
 
-def copy(path: Path):
-    dest = Path(f"/tmp{path}")
-    if dest.exists():
-        shutil.rmtree(dest)
-    dest.mkdir(parents=True, exist_ok=True)
-    print(f"Copying {path} to {dest}")
-    shutil.copytree(path, dst=dest, dirs_exist_ok=True)
-    print("done copying")
+def project_src_pkg(path: Path):
+    proj_src_path = get_project_src_path(path)
+    return [f"{proj_src_path}/__init__{suffix}" for suffix in (".mojo", ".🔥")]
 
 
 def find_mojo_pkgs(
     path: Path,
-    pkg_excludes: list[str],
     exclusions: set[str] | None = None
-):
-    py_paths = []
+) -> list[str]:
+    pkg_paths = []
 
     # copy(path)
     if exclusions is None:
@@ -32,22 +31,34 @@ def find_mojo_pkgs(
 
         for file in files:
             f = os.path.join(root, file)
-            if f.endswith(".coco"):
-                Path(f).unlink()
-            if f.endswith(".py"):
-                coco = f.replace(".py", ".coco")
-                coco = "/tmp" + coco
-                print(f"copying {f} to {coco}")
-                py_paths.append(coco)
-                shutil.copyfile(f, coco)
-    return py_paths
+            if f.endswith("__init__.mojo") or f.endswith("__init__.🔥"):
+                if f not in project_src_pkg(path):
+                    print(f"Adding {f}")
+                    pkg_paths.append(f)                    
+    return pkg_paths
 
 
 if __name__ == "__main__":
+    from subprocess import run, PIPE
     from argparse import ArgumentParser
     parser = ArgumentParser()
     parser.add_argument("path", help="path to directory to search")
     args = parser.parse_args()
-    p = Path(args.path)
 
-    #pprint(find_mojo_pkgs(p))
+    if args.path == ".":
+        p = Path.cwd()
+    elif args.path == "..":
+        p = Path.cwd().parent
+    else:
+        p = Path(args.path)
+
+    builds = p / "packages"
+    builds.mkdir(parents=True, exist_ok=True)
+    for pkg in find_mojo_pkgs(p):
+        pkg_path = Path(pkg)
+        pkg_path_parent = pkg_path.parent
+        pkg_name = pkg_path.parent.name
+        print(f"Building {builds / pkg-name}.📦")
+        cmd = ["mojo", "package", f"{pkg_path_parent}", "-o", f"{builds / pkg_name}.📦"]
+        print(cmd)
+        run(cmd, stdout=PIPE, stderr=PIPE)
