@@ -1,2 +1,4 @@
 .vscode/
-**/__pycache__/
+**/__pycache__/# pixi environments
+.pixi
+
