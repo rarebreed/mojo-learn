@@ -58,7 +58,7 @@ if __name__ == "__main__":
         pkg_path = Path(pkg)
         pkg_path_parent = pkg_path.parent
         pkg_name = pkg_path.parent.name
-        print(f"Building {builds / pkg-name}.📦")
+        print(f"Building {builds / pkg_name}")
         cmd = ["mojo", "package", f"{pkg_path_parent}", "-o", f"{builds / pkg_name}.📦"]
         print(cmd)
         run(cmd, stdout=PIPE, stderr=PIPE)
