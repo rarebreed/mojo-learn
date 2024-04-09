@@ -50,4 +50,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
     p = Path(args.path)
 
-    pprint(find_mojo_pkgs(p))
+    #pprint(find_mojo_pkgs(p))
