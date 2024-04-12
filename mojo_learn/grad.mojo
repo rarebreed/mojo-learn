@@ -15,7 +15,7 @@ struct Tensor1d[dtype: DType, size: Int](Stringable):
         self.reg = SIMD[dtype, size]()
         var idx = 0
         for i in range(len(val)):
-            if idx < 8:
+            if idx < size:
                 self.reg[i] = val[i]
             idx += 1
 
