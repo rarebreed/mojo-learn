@@ -26,8 +26,11 @@ struct Option[T: CE]:
             var r = f(self.data.take[T]())
             return Option[R](r)
 
-    fn map(inout self, f: fn(T) -> T) -> Self:
-        """More efficient map, when we map over the same type.
+    fn map(
+        inout self, 
+        f: fn(T) -> T
+    ) -> Self:
+        """More efficient map, when we map over the same type and mutate self.
         
         Does not require allocating a new Option, since we can reuse self.data. 
         """
@@ -43,7 +46,11 @@ struct Option[T: CE]:
             return Option[R](None)
         return f(self.data.take[T]())
 
-    fn flat_map(inout self, f: fn(T) -> Self) -> Self:
+    fn flat_map(
+        inout self, 
+        f: fn(T) -> Self
+    ) -> Self:
+        """More efficient flat_map when f returns Self."""
         if self.data.isa[T]():
             self.data = f(self.data.take[T]())
         return self
