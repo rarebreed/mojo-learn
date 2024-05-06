@@ -1,5 +1,6 @@
 from utils import Variant
 from collections import Optional
+from memory.unsafe_pointer import UnsafePointer
 
 trait CE(CollectionElement, Stringable): ...
 
@@ -7,12 +8,12 @@ trait CE(CollectionElement, Stringable): ...
 struct MyStack[T: CE]:
     var size: Int
     var idx: Int  # where to pop, push
-    var ptr: AnyPointer[T]
+    var ptr: UnsafePointer[T]
 
     fn __init__(inout self, size: Int):
         self.size = size
         self.idx = 0
-        self.ptr = AnyPointer[T].alloc(size)
+        self.ptr = UnsafePointer[T].alloc(size)
 
     fn __del__(owned self):
         self.ptr.free()

@@ -18,4 +18,5 @@ fn test_copy(orig: MyStack[String]):
     print("Address of copy_ms on the stack ", Pointer.address_of(copy_ms))
     var last = copy_ms.pop()
     if last:
-        print(last.value())
+        var lv = last.value()
+        print(lv[])
