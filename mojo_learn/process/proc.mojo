@@ -32,3 +32,7 @@ def main():
 
     var pet = MyPet("sam", 10)
     print(pet.age)
+    
+    var dt = imp("datetime")
+    var now = dt.datetime.now()
+    print(now)

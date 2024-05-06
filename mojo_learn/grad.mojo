@@ -51,24 +51,10 @@ alias F64Tens = Tensor1d[DType.float64, 8]
 
 
 fn derive(f: fn (F64Tens) -> F64Tens, inp: F64Tens, delta: Float64) -> F64Tens:
+    """Calculates the derivative of a function."""
     var f1 = f(inp + delta)
     var f2 = f(inp - delta)
     var num = Tensor1d(f1.reg - f2.reg)
     var derivative = num.reg / delta
     return Tensor1d(derivative)
 
-
-fn main():
-    var tens = F64Tens(2.0, 3.0, 4.0)
-    var tens2 = tens + 10
-    print(tens)
-    print(tens2)
-
-    var tens3 = tens2 * 5
-    print(tens3)
-
-    var tens4 = tens3 - 20
-    print(tens4)
-
-    fn func(x: Float64) -> Float64:
-        return (x**3) + (2 * (x**2)) + 10

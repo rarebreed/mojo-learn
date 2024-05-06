@@ -61,3 +61,6 @@ mojo_rem = "modular uninstall mojo"
 mod_auth = { cmd = "modular auth", depends_on = ["mod_ins"] }
 mojo_ins = { cmd = "modular install mojo", depends_on = ["mod_auth"] }
 
+[pypi-dependencies]
+daak = "*"
+
