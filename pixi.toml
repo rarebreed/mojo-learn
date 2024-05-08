@@ -3,7 +3,7 @@ name = "mojo-learn"
 version = "0.1.0"
 description = "Add a short description here"
 authors = ["Sean Toner <placeoftheway@gmail.com>"]
-channels = ["conda-forge"]
+channels = ["conda-forge", "nvidia", "nvidia/label/cuda-12.1.0", "pytorch"]
 platforms = ["linux-64", "osx-arm64", "win-64"]
 
 [tasks]
@@ -22,7 +22,6 @@ pytest-asyncio = ">=0.14.0,<0.24"
 
 [feature.data.dependencies]
 polars = ">=0.20.18,<0.21"
-pyarrow = ">=15.0.2,<15.1"
 
 [feature.viz.dependencies]
 jupyterlab = ">=1.0.10,<4.2"
@@ -33,10 +32,14 @@ plotly = ">=2.7.0,<5.20"
 [feature.serve.dependencies]
 
 [feature.cuda]
-channels = ["nvidia"]
+channels = ["nvidia","nvidia/label/cuda-12.1.0","pytorch"]
 platforms = ["linux-64","win-64"]
 system-requirements = {cuda = "12"}
-pypi-dependencies = { torch = "*" }
+
+[feature.cuda.dependencies]
+cuda = {version = "*"}
+pytorch = {version = "2.3.*"}
+pytorch-cuda = {version = "12.1.*"}
 
 [environments]
 test = ["test"]
