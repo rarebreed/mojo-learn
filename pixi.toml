@@ -34,7 +34,7 @@ plotly = ">=2.7.0,<5.20"
 [feature.cuda]
 channels = ["nvidia","nvidia/label/cuda-12.1.0","pytorch"]
 platforms = ["linux-64","win-64"]
-system-requirements = {cuda = "12"}
+#system-requirements = {cuda = "12"}
 
 [feature.cuda.dependencies]
 cuda = {version = "*"}
