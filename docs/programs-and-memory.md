@@ -15,9 +15,8 @@ why memory access is so costly.  Finally, it will cover how this all fits into t
 
 ## Part 1: How programs are built
 
-I realized while writing this article, that a lot of engineers either never learned how programs actually get built,
-loaded and executed, or they learned it once in school, and then forgot about it.  So, I will briefly explain several
-concepts:
+If you never learned how programs actually get built, loaded and executed, or forgot about it, I will briefly explain
+several concepts:
 
 - compilation
 - intermediate representations (IR) and assembly
@@ -28,13 +27,13 @@ concepts:
 [TODO insert a pic of the pipeline of events]
 
 Even languages like java or python run on applications that take raw source code (like python) or a pre-compiled IR like
-java bytecode and do many of the same steps that a compiled languages code would do, but at runtime.  In order to make
+java bytecode and do many of the same steps that a compiled languages code would do but at runtime.  In order to make
 things a little less general and abstract I will focus on arm64 (aka aarch64) architecture running on linux, that 
 generates ELF format binaries (ie executables, .o, .so, .a, etc)
 
 ### Compiling source code
 
-Ultimately, a computer runs on a combination of
+Ultimately, a computer runs on a combination of:
 
 - A CPU
 - memory
@@ -47,4 +46,5 @@ Ultimately, a computer runs on a combination of
 > to systems with an OS, but some of what will be covered is still relevant even on bare metal devices (bare metal in 
 > the pre-virtualization sense, meaning "without an operating system", not "a non-virtual computer")
 
-So the question is, "how does the computer  
+So the question is, "how does the computer go from human readable source code, to something the system executes?".  The
+first piece of the puzzle is compiling source code 
